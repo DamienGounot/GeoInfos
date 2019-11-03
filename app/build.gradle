@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.example.geoinfos"
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,8 +32,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
     implementation 'com.google.android.gms:play-services-location:9.8.0'
     implementation 'com.android.support:support-v4:23.4.0'
-
-    //these two lines are added
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
 
