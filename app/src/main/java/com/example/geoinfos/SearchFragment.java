@@ -18,6 +18,8 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -85,10 +87,18 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                // this line adds the data of your EditText and puts in your array
-                ARcountries.add(editText.getText().toString());
-                // next thing you have to do is check if your adapter has changed
-                arrayAdapter.notifyDataSetChanged();
+                if(editText.getText().toString().isEmpty()){
+                    Toast.makeText(getActivity().getBaseContext(),"Error : Text can not be empty",Toast.LENGTH_LONG).show();
+
+                }else{
+                    // this line adds the data of your EditText and puts in your array
+                    ARcountries.add(editText.getText().toString());
+                    // next thing you have to do is check if your adapter has changed
+                    arrayAdapter.notifyDataSetChanged();
+                    Toast.makeText(getActivity().getBaseContext(),"You successfully added a new element",Toast.LENGTH_LONG).show();
+                    editText.setText(null);
+                }
+
             }
         });
         return view;
