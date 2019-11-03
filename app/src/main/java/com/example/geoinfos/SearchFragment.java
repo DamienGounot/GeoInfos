@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +30,9 @@ public class SearchFragment extends Fragment {
     private ListView listViewResult;
     private ArrayList<String> ARcountries;
     private  ArrayAdapter<String> arrayAdapter;
+    private List<Country> countries;
+    private Button addButton;
+    private EditText editText;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class SearchFragment extends Fragment {
      View view = inflater.inflate(R.layout.fragment_search,container,false);
            textViewResult = view.findViewById(R.id.text_view_result);
             listViewResult =  view.findViewById(R.id.list_view_result);
+            addButton = view.findViewById(R.id.addBtn);
+            editText = view.findViewById(R.id.editTxt);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -54,7 +61,7 @@ public class SearchFragment extends Fragment {
                             return;
                         }
 
-                        List<Country> countries = response.body();
+                         countries = response.body();
 
 
                 ARcountries = new ArrayList<>();
@@ -72,6 +79,17 @@ public class SearchFragment extends Fragment {
                     textViewResult.setText(t.getMessage());
             }
 
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // this line adds the data of your EditText and puts in your array
+                ARcountries.add(editText.getText().toString());
+                // next thing you have to do is check if your adapter has changed
+                arrayAdapter.notifyDataSetChanged();
+            }
         });
         return view;
     }
