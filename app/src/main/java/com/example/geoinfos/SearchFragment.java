@@ -4,16 +4,66 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SearchFragment extends Fragment {
 
+    private TextView textViewResult;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search,container,false);
+
+     View view = inflater.inflate(R.layout.fragment_search,container,false);
+           textViewResult = view.findViewById(R.id.text_view_result);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://restcountries.eu/rest/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        API api = retrofit.create(API.class);
+
+        Call<List<Country>> call = api.getCountries();
+
+        call.enqueue(new Callback<List<Country>>() {
+            @Override
+            public void onResponse(Call<List<Country>> call, Response<List<Country>> response) {
+                        if(!response.isSuccessful()){
+                            textViewResult.setText("Code : " + response.code());
+                            return;
+                        }
+
+                        List<Country> countries = response.body();
+                        for (Country country : countries){
+                            String content = "";
+                            content += "Name : " + country.getName() + "\n";
+                            content += "Native Name : " + country.getNativeName() + "\n";
+                            content += "Capital : " + country.getCapital() + "\n";
+                            content += "Region : " + country.getRegion() + "\n";
+                            content += "Population : " + country.getPopulation() + "\n";
+                            content += "Flag : " + country.getFlag() + "\n\n";
+
+                            textViewResult.append(content);
+                        }
+            }
+
+            @Override
+            public void onFailure(Call<List<Country>> call, Throwable t) {
+                    textViewResult.setText(t.getMessage());
+            }
+        });
+        return view;
     }
 }
