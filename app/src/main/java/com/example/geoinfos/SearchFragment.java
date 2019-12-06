@@ -1,6 +1,4 @@
 package com.example.geoinfos;
-
-import android.graphics.Movie;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +15,6 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -68,7 +65,7 @@ public class SearchFragment extends Fragment {
 
                 ARcountries = new ArrayList<>();
                 for (Country country : countries){
-                ARcountries.add("\nCountry : " + country.getName() + "\n" + "Capital : " + country.getCapital() + "\n" + "Region : " + country.getRegion() + "\n" + "Population : " + country.getPopulation() + "\n" + "Flag : " + country.getFlag() + "\n");
+                ARcountries.add("\nCountry : " + country.getName() + "\n" + "Capital : " + country.getCapital() + "\n" + "Region : " + country.getRegion() + "\n" + "Population : " + country.getPopulation() + "\n");
                 }
                 arrayAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1,ARcountries);
 

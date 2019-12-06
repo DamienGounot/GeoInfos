@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="edit text here"
+        android:text="Mettez moi la moyenne svp"
+        android:textAlignment="center"
         android:inputType="text"/>
 </RelativeLayout>

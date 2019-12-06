@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/grey_light">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/text_view_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
             android:background="#AFF"
-            />
-    <Button
-        android:id="@+id/addBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_below="@+id/editTxt"
-        android:text="ADD"/>
-    <EditText
-        android:id="@+id/editTxt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/addBtn"
-        android:hint="new element to add"
-        android:textColor="#000"/>
+            android:textColor="#000" />
 
+        <Button
+            android:id="@+id/addBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTxt"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="ADD" />
+
+        <EditText
+            android:id="@+id/editTxt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/addBtn"
+            android:hint="new element to add"
+            android:textColor="#000" />
+
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/list_view_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        />
-</RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#000" />
+</LinearLayout>
 
