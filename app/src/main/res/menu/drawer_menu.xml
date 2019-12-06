@@ -6,13 +6,16 @@
 <group android:checkableBehavior="single">
     <item android:id="@+id/localize"
     android:icon="@drawable/ic_where_am_i"
-    android:title="Localize Me"/>
+    android:title="Map Display"/>
     <item android:id="@+id/search"
         android:icon="@drawable/ic_search"
-        android:title="Search"/>
+        android:title="API"/>
     <item android:id="@+id/camera"
         android:icon="@drawable/ic_camera"
         android:title="Take a picture"/>
+    <item android:id="@+id/getVoice"
+        android:icon="@drawable/ic_voice"
+        android:title="Use your voice"/>
 </group>
 
 </menu>

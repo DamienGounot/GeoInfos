@@ -49,6 +49,9 @@ private DrawerLayout drawer;
             case R.id.camera:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PictureFragment()).commit();
                 break;
+            case R.id.getVoice:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new VoiceFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
