@@ -61,7 +61,7 @@ public class VoiceFragment extends Fragment implements
 
         if (status == TextToSpeech.SUCCESS) {
 
-            int result = tts.setLanguage(Locale.US);
+            int result = tts.setLanguage(Locale.FRANCE);
 
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {

@@ -15,7 +15,7 @@
         android:title="Take a picture"/>
     <item android:id="@+id/getVoice"
         android:icon="@drawable/ic_voice"
-        android:title="Use your voice"/>
+        android:title="Text to Speech"/>
 </group>
 
 </menu>
