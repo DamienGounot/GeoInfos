@@ -1,8 +1,11 @@
 package com.example.geoinfos;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -23,11 +27,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SearchFragment extends Fragment {
+public class
+SearchFragment extends Fragment {
 
     private TextView textViewResult;
     private ListView listViewResult;
     private ArrayList<String> ARcountries;
+    private ArrayList<String> ARFcountries;
     private  ArrayAdapter<String> arrayAdapter;
     private List<Country> countries;
     private Button addButton;
@@ -62,12 +68,15 @@ public class SearchFragment extends Fragment {
 
                          countries = response.body();
 
-
                 ARcountries = new ArrayList<>();
+                ARFcountries = new ArrayList<>();
+
                 for (Country country : countries){
                 ARcountries.add("\nCountry : " + country.getName() + "\n" + "Capital : " + country.getCapital() + "\n" + "Region : " + country.getRegion() + "\n" + "Population : " + country.getPopulation() + "\n");
+                ARFcountries.add("\n" +country.getName()+ "\n");
+
                 }
-                arrayAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1,ARcountries);
+                arrayAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1,ARFcountries);
 
 
                        listViewResult.setAdapter(arrayAdapter);
@@ -90,12 +99,27 @@ public class SearchFragment extends Fragment {
                 }else{
                     // this line adds the data of your EditText and puts in your array
                     ARcountries.add(editText.getText().toString());
+                    ARFcountries.add(editText.getText().toString().substring(0, editText.getText().toString().indexOf("\n")));
                     // next thing you have to do is check if your adapter has changed
                     arrayAdapter.notifyDataSetChanged();
                     Toast.makeText(getActivity().getBaseContext(),"You successfully added a new element",Toast.LENGTH_LONG).show();
                     editText.setText(null);
                 }
 
+            }
+        });
+
+        listViewResult.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+
+                ItemFragment fragment = new ItemFragment();
+                Bundle args = new Bundle();
+                args.putString("arg_infos", ARcountries.get(position));
+                fragment.setArguments(args);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
             }
         });
         return view;
