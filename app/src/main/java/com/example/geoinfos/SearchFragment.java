@@ -109,8 +109,16 @@ SearchFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ItemFragment()).commit();
 
+
+                Toast.makeText(getActivity(),
+                        "onListItemClick is" + ARcountries.get(position), Toast.LENGTH_LONG)
+                        .show();
+                ItemFragment fragment = new ItemFragment();
+                Bundle args = new Bundle();
+                args.putString("argText", ARcountries.get(position));
+                fragment.setArguments(args);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
             }
         });
         return view;
