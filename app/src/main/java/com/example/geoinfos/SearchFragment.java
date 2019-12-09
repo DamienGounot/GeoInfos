@@ -33,6 +33,7 @@ SearchFragment extends Fragment {
     private TextView textViewResult;
     private ListView listViewResult;
     private ArrayList<String> ARcountries;
+    private ArrayList<String> ARFcountries;
     private  ArrayAdapter<String> arrayAdapter;
     private List<Country> countries;
     private Button addButton;
@@ -67,12 +68,15 @@ SearchFragment extends Fragment {
 
                          countries = response.body();
 
-
                 ARcountries = new ArrayList<>();
+                ARFcountries = new ArrayList<>();
+
                 for (Country country : countries){
                 ARcountries.add("\nCountry : " + country.getName() + "\n" + "Capital : " + country.getCapital() + "\n" + "Region : " + country.getRegion() + "\n" + "Population : " + country.getPopulation() + "\n");
+                ARFcountries.add("\n" +country.getName()+ "\n");
+
                 }
-                arrayAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1,ARcountries);
+                arrayAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1,ARFcountries);
 
 
                        listViewResult.setAdapter(arrayAdapter);
@@ -95,6 +99,7 @@ SearchFragment extends Fragment {
                 }else{
                     // this line adds the data of your EditText and puts in your array
                     ARcountries.add(editText.getText().toString());
+                    ARFcountries.add(editText.getText().toString().substring(0, editText.getText().toString().indexOf("\n")));
                     // next thing you have to do is check if your adapter has changed
                     arrayAdapter.notifyDataSetChanged();
                     Toast.makeText(getActivity().getBaseContext(),"You successfully added a new element",Toast.LENGTH_LONG).show();
@@ -110,13 +115,9 @@ SearchFragment extends Fragment {
 
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
 
-
-                Toast.makeText(getActivity(),
-                        "onListItemClick is" + ARcountries.get(position), Toast.LENGTH_LONG)
-                        .show();
                 ItemFragment fragment = new ItemFragment();
                 Bundle args = new Bundle();
-                args.putString("argText", ARcountries.get(position));
+                args.putString("arg_infos", ARcountries.get(position));
                 fragment.setArguments(args);
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
             }

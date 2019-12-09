@@ -20,10 +20,10 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_infos, container, false);
 
         if(getArguments() != null){
-            elementinfos = getArguments().getString("argText");
+            elementinfos = getArguments().getString("arg_infos");
         }
-        TextView textView =  view.findViewById(R.id.item_infos);
-        textView.setText(elementinfos);
+        TextView infos =  view.findViewById(R.id.item_infos);
+        infos.setText(elementinfos);
         return view;
     }
 }
