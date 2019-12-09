@@ -99,7 +99,11 @@ SearchFragment extends Fragment {
                 }else{
                     // this line adds the data of your EditText and puts in your array
                     ARcountries.add(editText.getText().toString());
-                    ARFcountries.add(editText.getText().toString().substring(0, editText.getText().toString().indexOf("\n")));
+                    if(editText.getText().toString().contains("\n")) {
+                        ARFcountries.add(editText.getText().toString().substring(0, editText.getText().toString().indexOf("\n")));
+                    }else{
+                        ARFcountries.add(editText.getText().toString());
+                    }
                     // next thing you have to do is check if your adapter has changed
                     arrayAdapter.notifyDataSetChanged();
                     Toast.makeText(getActivity().getBaseContext(),"You successfully added a new element",Toast.LENGTH_LONG).show();
